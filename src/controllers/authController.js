@@ -39,7 +39,7 @@ router.get("/me", async (req, res, next) => {
 
   const decoded = jwt.verify(token, config.secret);
   
-  const user = await User.findById(decoded.id);
+  const user = await User.findById(decoded.id, { password: 0 });
   if (!user) {
     return res.status(404).send('No user found');
   }
